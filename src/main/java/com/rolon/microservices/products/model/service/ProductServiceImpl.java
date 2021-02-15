@@ -26,5 +26,17 @@ public class ProductServiceImpl implements IProductService{
 	public Product findById(Long id) {
 		return productoRepository.findById(id).orElse(null);
 	}
-
+	
+	@Override
+	@Transactional(readOnly= true)
+	public String deleteById(Long id) {
+		Product product = findById(id);
+		productoRepository.deleteById(id);
+		return new StringBuilder("{\"message\"")
+				.append(":")
+				.append("\"")
+				.append(product.getName())
+				.append(" deleted\"}")
+				.toString();
+	}
 }

@@ -3,6 +3,7 @@ package com.rolon.microservices.products.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class ProductController {
 	@GetMapping("/list/{id}")
 	public Product getDetails(@PathVariable Long id) {
 		return productService.findById(id);
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public String delelteProduct(@PathVariable Long id) {
+		return productService.deleteById(id);
 	}
 }
