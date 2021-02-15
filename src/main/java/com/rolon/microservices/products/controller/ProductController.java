@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.rolon.microservices.products.model.entity.Product;
-import com.rolon.microservices.products.model.service.ProductServiceImpl;
+import com.rolon.microservices.products.model.service.IProductService;
 
 @RestController
 public class ProductController {
 	
 	@Autowired
-	private ProductServiceImpl productService;
+	private IProductService productService;
 	
 	@GetMapping("/list")
 	public List<Product> list(){
