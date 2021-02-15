@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.rolon.microservices.products.model.entity.Product;
 import com.rolon.microservices.products.model.service.IProductService;
@@ -27,7 +29,12 @@ public class ProductController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public String delelteProduct(@PathVariable Long id) {
+	public String deleteProduct(@PathVariable Long id) {
 		return productService.deleteById(id);
+	}
+	
+	@PostMapping("/save")
+	public Product uploadProduct(@RequestBody Product product) {
+		return productService.insert(product);
 	}
 }

@@ -17,19 +17,20 @@ import com.rolon.microservices.products.model.repository.ProductRepository;
 public class ProductServiceImpl implements IProductService{
 
 	@Autowired
-	private ProductRepository productoRepository;
+	private ProductRepository productRepository;
 	
 	@Override
 	@Transactional(readOnly= true)
 	public List<Product> findAll() {
-		return (List<Product>) productoRepository.findAll();
+		return (List<Product>) productRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly= true)
 	public Product findById(Long id) {
-		return productoRepository.findById(id).orElse(null);
+		return productRepository.findById(id).orElse(null);
 	}
+	
 	
 	@Override
 	@Transactional(readOnly= true)
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements IProductService{
 		String message = new StringBuilder(product.getName())
 				.append(" deleted")
 				.toString();
-		
+		productRepository.deleteById(id);
 		map.put("message", message);
 		try {
 			return objectMapper.writeValueAsString(map);
@@ -48,6 +49,10 @@ public class ProductServiceImpl implements IProductService{
 			// TODO Auto-generated catch block
 			return null;
 		}
+	}
 
+	@Override
+	public Product insert(Product product) {
+		return productRepository.save(product);
 	}
 }
