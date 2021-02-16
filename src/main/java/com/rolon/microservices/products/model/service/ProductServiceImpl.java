@@ -33,15 +33,16 @@ public class ProductServiceImpl implements IProductService{
 	
 	
 	@Override
-	@Transactional(readOnly= true)
 	public String deleteById(Long id) {
 		Product product = findById(id);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, String> map = new HashMap();
 		String message = new StringBuilder(product.getName())
 				.append(" deleted")
 				.toString();
-		productRepository.deleteById(id);
+		productRepository.delete(product);
+		
 		map.put("message", message);
 		try {
 			return objectMapper.writeValueAsString(map);
