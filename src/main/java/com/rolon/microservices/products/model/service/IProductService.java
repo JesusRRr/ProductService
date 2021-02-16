@@ -10,4 +10,5 @@ public interface IProductService {
 	public Product findById(Long id);
 	public String deleteById(Long id);
 	public Product insert(Product product);
+	public Product update(Long id, Product product);
 }

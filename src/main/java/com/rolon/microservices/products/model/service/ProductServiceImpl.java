@@ -56,4 +56,10 @@ public class ProductServiceImpl implements IProductService{
 	public Product insert(Product product) {
 		return productRepository.save(product);
 	}
+
+	@Override
+	public Product update(Long id, Product product) {
+		deleteById(id);
+		return insert(product);
+	}
 }
